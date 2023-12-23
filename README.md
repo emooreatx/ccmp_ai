@@ -14,7 +14,8 @@ Finally, advanced RAG techniques return the result
 
 ![image](https://github.com/emooreatx/ccmp_ai/assets/3317461/7b82db1a-9552-4075-94e8-2d38fdcb9bfa)
 
-![image](https://github.com/emooreatx/ccmp_ai/assets/3317461/364c5ed4-24cd-4d6a-97b8-f33dce4644b4)
+![image](https://github.com/emooreatx/ccmp_ai/assets/3317461/81fa8309-b82b-4a4c-b3d9-782aa3bced68)
+
 
 
 ## Features
