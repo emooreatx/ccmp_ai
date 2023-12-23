@@ -1,5 +1,21 @@
 ccmp_ai uses the [Autogen-AGI Framework](https://github.com/microsoft/autogen-agi) on top of the [AutoGen framework](https://github.com/microsoft/autogen) for multi-agent conversational systems, towards the goal of discovering and utilizing information in repositories like bitsavers and VTDA to identify, recover, restore, repair, and demonstrate antique computers.
 
+First, the agents check for existing knowledge, and if it has none, starts browsing a bitsavers mirror.
+
+![image](https://github.com/emooreatx/ccmp_ai/assets/3317461/b5854047-05f3-4003-bcf5-07e1d4136b93)
+
+![image](https://github.com/emooreatx/ccmp_ai/assets/3317461/21b47b40-7140-46e4-8046-f5ce0d8a4ec0)
+
+Then, the file is downloaded and a llama_index knowledge domain created
+
+![image](https://github.com/emooreatx/ccmp_ai/assets/3317461/4e335309-c67f-44d7-86cd-839f79307090)
+
+Finally, advanced RAG techniques return the result
+
+![image](https://github.com/emooreatx/ccmp_ai/assets/3317461/7b82db1a-9552-4075-94e8-2d38fdcb9bfa)
+
+![image](https://github.com/emooreatx/ccmp_ai/assets/3317461/364c5ed4-24cd-4d6a-97b8-f33dce4644b4)
+
 
 ## Features
 - **Enhanced Group Chat** 💬: Modified AutoGen classes for advanced group chat functionalities.
