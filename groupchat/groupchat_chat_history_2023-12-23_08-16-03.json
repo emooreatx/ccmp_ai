@@ -1,0 +1,86 @@
+[
+    {
+        "content": "You are a network of agents who answer questions regarding antique computers by referencing files from bitsavers. \nThe function calling agent can list the contents of directories and download files from the archives. \nThe consult archive agent can reference the files to answer questions.\nDo not attempt to read the file directly, instead please use consult_archive_bot\nWhen looking for files, start by listing the contents of pdf. Remember file names without suffixes are likely directories.\nconsult archive bot first, in case we already have domain knowledge for that make and model of device.\nQUERY: What type of grease was used on the IBM 029 Keypunch?\n",
+        "role": "user",
+        "name": "UserProxy"
+    },
+    {
+        "content": null,
+        "function_call": {
+            "arguments": "{\"directory_path\":\"pdf/ibm/punchedCard/\"}",
+            "name": "list_bitsavers_files"
+        },
+        "role": "assistant",
+        "name": "FunctionCallingAgent"
+    },
+    {
+        "content": "['Collator', 'Sorter', 'Card_Scans', 'Keypunch', 'Tabulator', 'Training', 'Punches', 'ElectronicStatisticalMachine', 'Verifier', 'Serial_Reader_Punch', 'CardControlledTapePunch', 'AccountingMachine', 'Interpreter', 'DocumentOriginatingMachine']",
+        "name": "list_bitsavers_files",
+        "role": "function"
+    },
+    {
+        "content": null,
+        "function_call": {
+            "arguments": "{\"directory_path\":\"pdf/ibm/punchedCard/Keypunch\"}",
+            "name": "list_bitsavers_files"
+        },
+        "role": "assistant",
+        "name": "FunctionCallingAgent"
+    },
+    {
+        "content": "['024-026', '029', '129']",
+        "name": "list_bitsavers_files",
+        "role": "function"
+    },
+    {
+        "content": null,
+        "function_call": {
+            "arguments": "{\"directory_path\":\"pdf/ibm/punchedCard/Keypunch/029\"}",
+            "name": "list_bitsavers_files"
+        },
+        "role": "assistant",
+        "name": "FunctionCallingAgent"
+    },
+    {
+        "content": "['S124-0085-5_29_Parts_Man_Dec68.pdf', '29_ModelB_Drawings.pdf', '225-3386-0_29_LeftZero_Opt_Maint.pdf', '29_ModelA_Drawings.pdf', '225-3357-3_29_FE_Maint_Man_Nov70.pdf', 'IBM_029C_Punch_Schematics_196810.pdf', 'S225-3358-4_29_FETOM_Mar70.pdf', 'GA24-3332-6_Reference_Manual_Model_29_Card_Punch_Jun70.pdf', 'A24-3332-3_29_Reference_Man.pdf']",
+        "name": "list_bitsavers_files",
+        "role": "function"
+    },
+    {
+        "content": null,
+        "function_call": {
+            "arguments": "{\"domain_description\":\"IBM 029 Keypunch maintenance and parts information\",\"question\":\"What type of grease was used on the IBM 029 Keypunch?\"}",
+            "name": "consult_archive_agent"
+        },
+        "role": "assistant",
+        "name": "FunctionCallingAgent"
+    },
+    {
+        "content": "Error: Could not find a relevant repository for domain description: IBM 029 Keypunch maintenance and parts information",
+        "name": "consult_archive_agent",
+        "role": "function"
+    },
+    {
+        "content": null,
+        "function_call": {
+            "arguments": "{\"directory_path\":\"pdf/ibm/punchedCard/Keypunch/029\",\"filename\":\"225-3357-3_29_FE_Maint_Man_Nov70.pdf\",\"bitsavers_path\":\"pdf/ibm/punchedCard/Keypunch/029\",\"domain_description\":\"IBM 029 Keypunch maintenance manual\"}",
+            "name": "download_bitsavers_file"
+        },
+        "role": "assistant",
+        "name": "FunctionCallingAgent"
+    },
+    {
+        "content": "docs/pdf/ibm/punchedCard/Keypunch/029/225-3357-3_29_FE_Maint_Man_Nov70.pdf",
+        "name": "download_bitsavers_file",
+        "role": "function"
+    },
+    {
+        "content": null,
+        "function_call": {
+            "arguments": "{\"domain_description\":\"IBM 029 Keypunch maintenance manual\",\"question\":\"What type of grease was used on the IBM 029 Keypunch?\"}",
+            "name": "consult_archive_agent"
+        },
+        "role": "assistant",
+        "name": "FunctionCallingAgent"
+    }
+]
