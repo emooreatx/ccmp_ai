@@ -23,9 +23,9 @@ AGENT_TEAM = [
     function_calling_agent,
 #    creative_solution_agent,
 #    first_principles_thinker_agent,
-    project_manager_agent,
-    task_history_review_agent,
-    task_comprehension_agent,
+#    project_manager_agent,
+#    task_history_review_agent,
+#    task_comprehension_agent,
     bitsavers_agent,
 ]
 
@@ -71,11 +71,12 @@ group_chat_manager = ModifiedGroupChatManager(groupchat=group_chat, llm_config=l
 
 # Example query
 prompt = """You are a network of agents who answer questions regarding antique computers by referencing files from bitsavers. 
-The function calling agent can list the contents of directories and download files from the archives. 
-The consult archive agent can reference the files to answer questions.
-Do not attempt to read the file directly, instead please use consult_archive_bot
+The function calling agent can list the contents of directories and download files from the archives, and it can call the consult archive function. 
+The consult archive function can reference the files to answer questions.
+Do not attempt to read the file directly, instead please ask the function execution bot to consult the archives
 When looking for files, start by listing the contents of pdf. Remember file names without suffixes are likely directories.
-consult archive bot first, in case we already have domain knowledge for that make and model of device.
+consult archive agent function first, in case we already have domain knowledge for that make and model of device.
+Always start at pdf when looking for files on bitsavers to double check which directory to start in.
 QUERY: What type of grease was used on the IBM 029 Keypunch?
 """
 

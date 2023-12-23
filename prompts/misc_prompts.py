@@ -450,8 +450,8 @@ RAG_FUSION_PROMPT = (
 
 DOMAIN_QA_PROMPT_TMPL_STR = (
         f"You are an expert at the following DOMAIN which is described in the DOMAIN_DESCRIPTION. Given the following DOMAIN_SPECIFIC_CONTEXT, please answer the QUESTION to the best of your ability. If the information required for the answer cannot be found in the DOMAIN_SPECIFIC_CONTEXT, then reply with 'DOMAIN CONTEXT NOT AVAILABLE'.\n\n"
-        "Your answer must be that of an elite expert. Please! My career depends on it!!\n"
-        "IMPORTANT: If you are unsure of the answer, please reply with only 'DOMAIN CONTEXT NOT AVAILABLE' and no other text.\n"
+        "Your answer must be that of an elite expert. Please! Take your time and think things through step by step!!\n"
+        "IMPORTANT: If you are unsure of the answer, please reply with only 'DOMAIN CONTEXT NOT AVAILABLE' and no other text. If you are sure of your answer based on the text, please include the document name and page numbers that you are basing your response off, and the section of the document that page is in.\n"
         "DOMAIN:\n"
         "---------------------\n"
         "{domain}\n"
@@ -470,7 +470,7 @@ DOMAIN_QA_PROMPT_TMPL_STR = (
 
 GENERAL_QA_PROMPT_TMPL_STR = (
     f"You are a helpful assistant. Please use the provided RELEVANT_CONTEXT to ANSWER the given QUESTION.\n\n"
-    "Your answer must be that of an elite expert. Please! My career depends on it!!\n"
+    "Your answer must be that of an elite expert. Please! Work hard and be exhaustive! Take your time! Include DOCUMENT NAME AND PAGE NUMBER and answer ONLY based on statements in the document\n"
     "RELEVANT_CONTEXT:\n"
     "---------------------\n"
     "{context_str}\n"
