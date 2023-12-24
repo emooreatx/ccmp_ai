@@ -6,6 +6,7 @@ This file contains the functions available to the FunctionCallingAgent.
 import autogen
 import os
 from ftplib import FTP
+import requests
 from prompts.misc_prompts import (
     ARCHIVE_AGENT_MATCH_DOMAIN_PROMPT,
 )
@@ -49,7 +50,7 @@ llm_config4 = {
     "temperature": 0.1,
 }
 
-WORK_DIR = "working"
+WORK_DIR = "."
 DOMAIN_KNOWLEDGE_DOCS_DIR = "docs"
 DOMAIN_KNOWLEDGE_STORAGE_DIR = "storage"
 COMM_DIR = "url_search_results"
@@ -219,6 +220,20 @@ agent_functions.extend([
             "required": ["directory_path", "filename", "bitsavers_path", "domain_description"],
         },
     },
+        {
+        "name": "search_wikipedia",
+        "description": "Searches Wikipedia using a provided query.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "The query to be searched on Wikipedia.",
+                },
+            },
+            "required": ["query"],
+        },
+    },
 ])
 
 def list_bitsavers_files(directory_path):
@@ -259,7 +274,56 @@ def download_bitsavers_file(directory_path, filename, bitsavers_path, domain_des
 
     return local_filename
 
+def search_wikipedia(search_term):
+    """
+    Search for the most relevant Wikipedia article by a search term and return the full page content.
 
+    :param search_term: The search term to query Wikipedia.
+    :return: The full Wikipedia page content or an error message.
+    """
+    base_url = "https://en.wikipedia.org/w/api.php"
+    search_params = {
+        'action': 'query',
+        'list': 'search',
+        'srsearch': search_term,
+        'format': 'json',
+        'srlimit': 1
+    }
+
+    try:
+        search_response = requests.get(base_url, params=search_params)
+        search_response.raise_for_status()
+
+        search_data = search_response.json()
+        search_results = search_data['query']['search']
+        if not search_results:
+            return "No results found for the search term."
+
+        page_title = search_results[0]['title']
+
+        content_params = {
+            'action': 'query',
+            'format': 'json',
+            'titles': page_title,
+            'prop': 'extracts',
+            'exintro': True,
+            'explaintext': True,
+        }
+
+        content_response = requests.get(base_url, params=content_params)
+        content_response.raise_for_status()
+
+        content_data = content_response.json()
+        page = next(iter(content_data['query']['pages'].values()))
+
+        if 'extract' in page:
+            return page['extract']
+        else:
+            return "The page does not exist or an error occurred."
+
+    except requests.exceptions.RequestException as e:
+        return f"An error occurred: {e}"
+    
 
 def read_file(file_path):
     resolved_path = os.path.abspath(os.path.normpath(f"{WORK_DIR}/{file_path}"))
