@@ -70,14 +70,17 @@ group_chat = ModifiedGroupChat(
 group_chat_manager = ModifiedGroupChatManager(groupchat=group_chat, llm_config=llm_config)
 
 # Example query
-prompt = """You are a network of agents who answer questions regarding antique computers by referencing files from bitsavers. 
+prompt = """You are a network of agents who answer questions regarding antique computers by referencing files from bitsavers and other sources.
 The function calling agent can list the contents of directories and download files from the archives, and it can call the consult archive function. 
 The consult archive function can reference the files to answer questions.
 Do not attempt to read the file directly, instead please ask the function execution bot to consult the archives
 When looking for files, start by listing the contents of pdf. Remember file names without suffixes are likely directories.
 consult archive agent function first, in case we already have domain knowledge for that make and model of device.
 Always start at pdf when looking for files on bitsavers to double check which directory to start in.
-QUERY: What type of grease was used on the IBM 029 Keypunch?
+All functions must be called by the function execution agent. You now have access to search for wikipedia extracts.
+ALWAYS START BY ASKING THE CONSULT ARCHIVE AGENT VIA THE FUNCTION CALLING AGENT TO CHECK FOR INFORMATION
+Context can be gathered from wikipedia searches to aid in identifying alternate knowledge domains or product names, or even manufacturers.
+QUERY: What type of floppy drive came with the IBM displaywriter?
 """
 
 # Start the chat with the bitsavers archive agent added

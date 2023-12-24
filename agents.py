@@ -37,6 +37,7 @@ from agent_functions import (
     consult_archive_agent,
     list_bitsavers_files,
     download_bitsavers_file,
+    search_wikipedia,
 )
 
 google_search_api_key = os.environ["GOOGLE_SEARCH_API_KEY"]
@@ -107,12 +108,20 @@ function_calling_agent = autogen.AssistantAgent(
         "consult_archive_agent": consult_archive_agent,
         "download_bitsavers_file": download_bitsavers_file,
         "list_bitsavers_files": list_bitsavers_files,
+        "search_wikipedia": search_wikipedia,
     },
 )
 bitsavers_agent = autogen.AssistantAgent(
     name="BitsaversAgent",
-    system_message="You are an expert in antique computers, and proposing the use of functions, specifically download_bitsavers_file and list_bitsavers_files, creatively. Once you have a file downloaded with function calling agent, use consult archive agent to get the answer to the query. DO NOT USE READ FILE to read files downloaded from bitsavers, use the archive bot. You especially are good at finding the relevant directory or files from a list based on context, and speak up when you believe you know the best next action.",
+    system_message="You are an expert in antique computers, and proposing the use of functions by function calling agent, specifically download_bitsavers_file and list_bitsavers_files, creatively. Once you have a file downloaded with function calling agent, use consult archive agent to get the answer to the query. DO NOT USE READ FILE to read files downloaded from bitsavers, use the archive bot. You especially are good at finding the relevant directory or files from a list based on context, and speak up when you believe you know the best next action. You can also ask the function calling agent to search wikipedia for relevant articles",
     llm_config=llm_config4,
+#    function_map={
+#        "consult_archive_agent": consult_archive_agent,
+#        "download_bitsavers_file": download_bitsavers_file,
+#        "list_bitsavers_files": list_bitsavers_files,
+#        "search_wikipedia": search_wikipedia,
+#    },
+
 )
 
 
