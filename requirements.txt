@@ -1,4 +1,4 @@
-pyautogen==0.2.0b4
+ag2==0.2.0b4
 python-dotenv==1.0.0
 langchain==0.0.334
 llama_index==0.9.8
